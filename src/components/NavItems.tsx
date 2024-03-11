@@ -1,61 +1,72 @@
 "use client";
 
-import { PRODUCT_CATEGORIES } from "@/config";
-import { useEffect, useRef, useState } from "react";
-import NavItem from "./NavItem";
-import { useOnClickOutside } from "@/hooks/use-on-click-outside";
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import {
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { PRODUCT_CATEGORIES } from "@/config";
+import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 
 const NavItems = () => {
-  const [activeIndex, setactiveIndex] = useState<null | number>(null);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setactiveIndex(null);
-      }
-    };
-    document.addEventListener("keydown", handler);
-  }, []);
-
-  const isAnyOpen = activeIndex !== null;
-
-  const navRef = useRef<HTMLDivElement | null>(null);
-
-  useOnClickOutside(navRef, () => setactiveIndex(null));
-
   return (
-    <div className="flex gap-4 h-full" ref={navRef}>
-      <div className="flex items-center font-semibold">
-        <Link href="#" className={buttonVariants({ variant: "ghost" })}>
-          All Products
+    <>
+      <NavigationMenuItem>
+        <Link href="#" legacyBehavior passHref>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            All Products
+          </NavigationMenuLink>
         </Link>
-      </div>
-      {PRODUCT_CATEGORIES.map((category, i) => {
-        const handleOpen = () => {
-          if (activeIndex === i) {
-            setactiveIndex(null);
-          } else {
-            setactiveIndex(i);
-          }
-        };
-
-        const isOpen = activeIndex === i;
-
-        return (
-          <NavItem
-            key={category.value}
-            category={category}
-            handleOpen={handleOpen}
-            isOpen={isOpen}
-            isAnyOpen={isAnyOpen}
-          />
-        );
-      })}
-    </div>
+      </NavigationMenuItem>
+      {PRODUCT_CATEGORIES.map((category, i) => (
+        <NavigationMenuItem key={category.value}>
+          <NavigationMenuTrigger>{category.label}</NavigationMenuTrigger>
+          <NavigationMenuContent className="max-h-96 overflow-y-auto">
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {category.subcategories.map((item) => (
+                <ListItem key={item.name} title={item.name} href={item.href} />
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      ))}
+    </>
   );
 };
+
+const ListItem = forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="flex justify-between text-sm font-medium leading-none">
+            {title}
+            <ChevronRight size={12} className="inline" />
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 export default NavItems;
