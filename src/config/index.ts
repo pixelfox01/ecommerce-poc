@@ -4,19 +4,80 @@ export const PRODUCT_CATEGORIES = [
     value: "categories" as const,
     subcategories: [
       {
-        name: "Electrical & Lighting",
+        name: "Hardwood",
         href: "#",
-        imageSrc: "/images/categories/electrical.jpg",
       },
       {
-        name: "Tools",
+        name: "Softwood",
         href: "#",
-        imageSrc: "/images/categories/tools.jpg",
       },
       {
-        name: "Plumbing",
+        name: "MDF",
         href: "#",
-        imageSrc: "/images/categories/plumbing.jpg",
+      },
+      {
+        name: "Chipboard",
+        href: "#",
+      },
+      {
+        name: "Plywood/Blockboard",
+        href: "#",
+      },
+      {
+        name: "Laminates",
+        href: "#",
+      },
+      {
+        name: "Veneers",
+        href: "#",
+      },
+      {
+        name: "Hardware",
+        href: "#",
+      },
+      {
+        name: "Ironmongery",
+        href: "#",
+      },
+      {
+        name: "Hand Tools",
+        href: "#",
+      },
+      {
+        name: "Fasteners",
+        href: "#",
+      },
+      {
+        name: "Adhesives",
+        href: "#",
+      },
+      {
+        name: "Power Tools",
+        href: "#",
+      },
+      {
+        name: "Paints & Polishes",
+        href: "#",
+      },
+      {
+        name: "Gypsum Products",
+        href: "#",
+      },
+      {
+        name: "Cement Fibre Boards",
+        href: "#",
+      },
+      {
+        name: "Electrical & Sanitaryware",
+        href: "#",
+      },
+      {
+        name: "Acrylic Sheets",
+        href: "#",
+      },
+      {
+        name: "Aluminium Composite Panels",
+        href: "#",
       },
     ],
   },
