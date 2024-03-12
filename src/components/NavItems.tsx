@@ -24,7 +24,7 @@ const NavItems = () => {
           </NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
-      {PRODUCT_CATEGORIES.map((category, i) => (
+      {PRODUCT_CATEGORIES.map((category) => (
         <NavigationMenuItem key={category.value}>
           <NavigationMenuTrigger>{category.label}</NavigationMenuTrigger>
           <NavigationMenuContent className="max-h-96 overflow-y-auto">
