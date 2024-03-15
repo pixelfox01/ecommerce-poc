@@ -24,7 +24,7 @@ const Navbar = () => {
             className="text-primary font-bold tracking-widest uppercase text-lg lg:text-xl"
             href="/"
           >
-            GRATIS LLC
+            PixelCommerce
           </Link>
         </div>
         <NavigationMenu className="w-full">
